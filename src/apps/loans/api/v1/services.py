@@ -1,6 +1,7 @@
 from datetime import datetime
 
 from dateutil.relativedelta import relativedelta
+from payments.api.v1.services import CreatePaymentsService
 
 from .repositories import CreateLoanRepository, ListAllLoansRepository
 
@@ -103,9 +104,14 @@ class CreateLoanService:
             insurance,
         )
 
-        return self.repository.handle(
+        loan = self.repository.handle(
             user_id,
             validated_data,
             iof_interest_rate,
             cet_amount,
         )
+
+        payments = CreatePaymentsService()
+        payments.handle(cet_amount, installments, loan)
+
+        return loan

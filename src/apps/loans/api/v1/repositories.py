@@ -40,7 +40,6 @@ class CreateLoanRepository(LoansBaseRepository):
             )
             loan.full_clean()
             loan.save()
-
             return loan
 
         except (IntegrityError, OperationalError) as error:

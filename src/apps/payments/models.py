@@ -22,6 +22,11 @@ class Payment(models.Model):
         max_digits=10,
         decimal_places=2,
     )
+    installment_number = models.IntegerField(
+        verbose_name="Identificador da Parcela do Empréstimo",
+        blank=False,
+        null=False,
+    )
     date = models.DateTimeField(
         verbose_name="Data de Solicitação do Empréstimo",
         db_index=True,
