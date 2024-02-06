@@ -25,9 +25,7 @@ class GetCustomerFromUserModelRepository:
 class CreateLoanRepository(LoansBaseRepository):
     def handle(self, user_id, validated_data, iof_interest_rate, cet_amount):
         user = GetCustomerFromUserModelRepository.handle(user_id)
-        import ipdb
 
-        ipdb.set_trace()
         try:
             loan = self.model.objects.create(
                 amount=validated_data["amount"],
@@ -42,6 +40,7 @@ class CreateLoanRepository(LoansBaseRepository):
             )
             loan.full_clean()
             loan.save()
+            return loan
 
         except (IntegrityError, OperationalError) as error:
             raise ValidationError(
