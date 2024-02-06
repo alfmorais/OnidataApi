@@ -12,22 +12,26 @@ from .serializers import (
 from .services import BalanceService, PaymentListService, PaymentUpdateService
 
 
-class PaymentListAndUpdateView(APIView):
+class PaymentListView(APIView):
     authentication_classes = [TokenAuthentication]
     permission_classes = [IsAuthenticated]
 
     def get(self, request, loan_uuid):
-        # TODO: Colocar um filtro django para listar se é pago ou não.
         service = PaymentListService()
-        payments_queryset = service.handle(loan_uuid, is_paid=True)
+        payments_queryset = service.handle(loan_uuid)
         response = PaymentSerializer(payments_queryset, many=True).data
         return Response({"data": response}, status=HTTP_200_OK)
 
-    def put(self, request, loan_uuid):
+
+class PaymentUpdateView(APIView):
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
+
+    def put(self, request):
         service = PaymentUpdateService()
         serializer = PaymentUpdateSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
-        data = service.handle(loan_uuid, request.data)
+        data = service.handle(request.data)
         response = PaymentSerializer(data, many=False).data
         return Response({"data": response}, status=HTTP_201_CREATED)
 

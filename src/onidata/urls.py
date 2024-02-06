@@ -1,7 +1,8 @@
 from apps.loans.api.v1.views import LoansListAndCreateView
 from apps.payments.api.v1.views import (
     BalanceListView,
-    PaymentListAndUpdateView,
+    PaymentListView,
+    PaymentUpdateView,
 )
 from django.contrib import admin
 from django.urls import include, path
@@ -14,8 +15,13 @@ loans_patterns = [
 payments_patters = [
     path(
         "<uuid:loan_uuid>/",
-        PaymentListAndUpdateView.as_view(),
-        name="list_and_update",
+        PaymentListView.as_view(),
+        name="list",
+    ),
+    path(
+        "",
+        PaymentUpdateView.as_view(),
+        name="update",
     ),
     path("<uuid:loan_uuid>/balance/", BalanceListView.as_view(), name="list"),
 ]

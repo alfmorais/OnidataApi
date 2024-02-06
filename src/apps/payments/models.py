@@ -30,7 +30,8 @@ class Payment(models.Model):
     date = models.DateTimeField(
         verbose_name="Data de Solicitação do Empréstimo",
         db_index=True,
-        default=None,
+        null=True,
+        blank=True,
     )
     is_paid = models.BooleanField(
         verbose_name="Parcela foi paga?",
@@ -42,4 +43,4 @@ class Payment(models.Model):
         verbose_name_plural = "Pagamentos"
 
     def __str__(self) -> str:
-        return f"ID: {self.id} - Amount: {self.amount}"
+        return f"ID: {self.id}"

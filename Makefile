@@ -25,3 +25,7 @@ create-super-user:
 itsmine:
 	@echo "Itsmine"
 	sudo chown -R $USER src
+
+shell:
+	@echo "Shell on docker-compose."
+	docker-compose run onidata python3 manage.py shell

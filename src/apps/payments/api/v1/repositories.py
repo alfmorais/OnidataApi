@@ -14,24 +14,24 @@ class PaymentBaseRepository:
 
 
 class ListAllPaymentsRepository(PaymentBaseRepository):
-    def handle(self, loan_uuid, is_paid):
-        payments = self.model.objects.filter(loan=loan_uuid, is_paid=is_paid)
+    def handle(self, loan_uuid):
+        payments = self.model.objects.filter(loan=loan_uuid)
         return payments
 
 
 class UpdatePaymentRepository(PaymentBaseRepository):
-    def handle(self, loan_uuid, payload):
-        payment = self.model.objects.filter(
-            loan=loan_uuid,
+    def handle(self, payload):
+        queryset = self.model.objects.filter(
             id=payload["id"],
-        ).first()
+        )
 
-        if payment.count() == 0:
+        if queryset.count() == 0:
             raise ValidationError(
                 detail={"error": "Payment not found"},
                 code=HTTP_404_NOT_FOUND,
             )
 
+        payment = queryset.first()
         payment.is_paid = payload["is_paid"]
         payment.date = now()
         payment.save()
@@ -39,7 +39,18 @@ class UpdatePaymentRepository(PaymentBaseRepository):
 
 
 class BalancePaymentRepository(PaymentBaseRepository):
-    def handle(self, loan_uuid): ...
+    def handle(self, loan_uuid):
+        queryset = self.model.objects.filter(
+            loan__id=str(loan_uuid),
+        )
+
+        if queryset.count() == 0:
+            raise ValidationError(
+                detail={"error": "Payments not found"},
+                code=HTTP_404_NOT_FOUND,
+            )
+
+        return queryset
 
 
 class CreatePaymentRepository(PaymentBaseRepository):
@@ -52,8 +63,9 @@ class CreatePaymentRepository(PaymentBaseRepository):
             payment = self.model(
                 loan=loan,
                 installment_amount=formated_installments_amount,
-                installments_number=installment_number,
+                installment_number=installment_number,
                 is_paid=False,
+                date=None,
             )
             bulk_create_payment_list.append(payment)
 
