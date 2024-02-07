@@ -177,6 +177,7 @@ Resposta:
 {
     "data": {
         "loan_id": "f8b2443f-a474-462e-9eb2-f38e1e7f854d",
+        "interest_rate": 5.0,
         "installments_paid": 1,
         "installments_missing_payment": 2,
         "total_installments": 3,
