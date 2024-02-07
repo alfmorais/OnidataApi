@@ -17,11 +17,16 @@ python-dateutil = "^2.8.2"
 ipdb = "^0.13.13"
 pre-commit = "^3.6.0"
 pytest = "^8.0.0"
+pytest-django = "^4.8.0"
+freezegun = "^1.4.0"
+factory-boy = "^3.3.0"
+pytest-factoryboy = "^2.6.0"
+pytest-vcr = "^1.0.2"
 
 [tool.pytest.ini_options]
 pythonpath = ". src"
 DJANGO_SETTINGS_MODULE = "tests.settings"
-python_files = ["test_*.py", "*_test.py", "testing/python/*.py"]
+python_files = ["tests_*.py", "*_test.py", "testing/python/*.py"]
 
 [build-system]
 requires = ["poetry-core"]

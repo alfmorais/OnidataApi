@@ -32,9 +32,9 @@ class IOFInterestRateService:
             iof_interest_rate (Decimal): iof final value
         """
 
-        tax_taxation = amount * TAX_TAXATION_VALUE
+        tax_taxation = amount * (TAX_TAXATION_VALUE / 100)
         daily_amortization = (
-            amount * loan_time_in_days * DAILY_AMORTIZATION_VALUE
+            amount * loan_time_in_days * (DAILY_AMORTIZATION_VALUE / 100)
         )  # noqa E501
         limit_value_daily_amortization = amount * LIMIT_TAX_IOF_VALUE
 
@@ -104,10 +104,12 @@ class CreateLoanService:
             insurance,
         )
 
+        formated_iof_interest_rate = str(iof_interest_rate)
+
         loan = self.repository.handle(
             user_id,
             validated_data,
-            iof_interest_rate,
+            formated_iof_interest_rate,
             cet_amount,
         )
 
