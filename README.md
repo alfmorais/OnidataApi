@@ -48,6 +48,20 @@ poetry shell
 python3 src/manage.py runserver
 ```
 
+## Rodando as migrações do Banco de Dados:
+
+- Rodando pelo Docker Compose:
+```bash
+make makemigrations
+make migrate
+```
+
+- Rodando pelo Poetry e Virtualenv
+```bash
+python3 src/manage.py makemigrations
+python3 src/manage.py migrate
+```
+
 ## Executando os testes do projeto:
 
 Para executar os testes unitários e de integração do projeto, basta utilizar o seguinte comando:
@@ -66,12 +80,21 @@ Na pasta `docs`, você encontrará dois arquivos:
 1. [Coleção em JSON do Postman, considerando todos os endpoints](docs/OnidataApi.postman_collection.json)
 
 
-## Criando um Super Usuário:
+## Criando um Super Usuário / Admin:
 
 Para criar um super usuário no Django, execute o seguinte comando e siga as instruções no terminal:
 
+- Rodando pelo Docker Compose:
+
 ```bash
 make create-super-user
+```
+
+OBS: Com esse usuário será possivel acessar o Painel Administrativo.
+
+- Rodando pelo Poetry e Virtualenv
+```bash
+python3 src/manage.py createsuperuser
 ```
 
 ## Criando um Token de Autenticação:
