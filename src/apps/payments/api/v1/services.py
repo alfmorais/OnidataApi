@@ -43,14 +43,15 @@ class BalanceService:
                 installments_missing_payment.append(payment)
 
         pending_payment = self.total_amount(installments_missing_payment)
+        amount_paid = self.total_amount(installments_paid)
+        total_installments = len(installments_paid) + len(installments_missing_payment)
 
         response = {
             "loan_id": loan_uuid,
             "installments_paid": len(installments_paid),
             "installments_missing_payment": len(installments_missing_payment),
-            "total_installments": len(installments_paid)
-            + len(installments_missing_payment),
-            "amount_paid": self.total_amount(installments_paid),
+            "total_installments": total_installments,
+            "amount_paid": amount_paid,
             "amount_missing_payment": pending_payment,
         }
         return response
