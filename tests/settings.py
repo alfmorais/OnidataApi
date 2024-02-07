@@ -1,6 +1,8 @@
 import os
 
-from src.onidata.settings import BASE_DIR
+from src.onidata.settings import *  # noqa
+
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 DATABASES = {
     "default": {

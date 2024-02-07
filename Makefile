@@ -1,3 +1,5 @@
+.PHONY: test
+
 requirements-generate:
 	@echo "Generate requirements.txt file with hashes."
 	poetry export -f requirements.txt --with=test --output requirements.txt
@@ -29,3 +31,7 @@ itsmine:
 shell:
 	@echo "Shell on docker-compose."
 	docker-compose run onidata python3 manage.py shell
+
+remove-pycaches:
+	@echo "Delete pycaches files."
+	find . | grep -E "(/__pycache__$|\.pyc$|\.pyo$)" | xargs rm -rf
