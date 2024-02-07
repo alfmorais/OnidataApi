@@ -1,4 +1,3 @@
-.PHONY: test
 
 requirements-generate:
 	@echo "Generate requirements.txt file with hashes."
@@ -8,21 +7,23 @@ build-run-project:
 	@echo "Running project with docker."
 	docker-compose up --build
 
+.PHONY: test
 test:
 	@echo "Running tests with pytest."
-	docker-compose run onidata pytest -vvv
+	pytest -vvv --disable-warnings
+	# docker-compose run onidata pytest -vvv --ds=tests.settings $(PYTHONPATH)
 
 makemigrations:
 	@echo "Running makemigrations with docker."
-	docker-compose run onidata python3 manage.py makemigrations
+	docker-compose run onidata python3 src/manage.py makemigrations
 
 migrate:
 	@echo "Running migrate with docker."
-	docker-compose run onidata python3 manage.py migrate
+	docker-compose run onidata python3 src/manage.py migrate
 
 create-super-user:
 	@echo "Creating superuser."
-	docker-compose run onidata python3 manage.py createsuperuser
+	docker-compose run onidata python3 src/manage.py createsuperuser
 
 itsmine:
 	@echo "Itsmine"
@@ -30,7 +31,7 @@ itsmine:
 
 shell:
 	@echo "Shell on docker-compose."
-	docker-compose run onidata python3 manage.py shell
+	docker-compose run onidata python3 src/manage.py shell
 
 remove-pycaches:
 	@echo "Delete pycaches files."

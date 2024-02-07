@@ -1,6 +1,6 @@
 import pytest
 
-pytestmark = pytest.mark.db
+pytestmark = pytest.mark.django_db
 
 
 @pytest.mark.parametrize(
@@ -74,7 +74,7 @@ pytestmark = pytest.mark.db
         ),
     ],
 )
-def test_list_create_loan_error(
+def test_create_loan_error(
     status_code,
     payload,
     expected_response,
@@ -87,18 +87,20 @@ def test_list_create_loan_error(
     assert response.status_code == status_code
 
 
-def test_list_create_loan_not_authorized(api_client):
+def test_create_loan_not_authorized(api_client):
     url = "/v1/loans/"
-    response = api_client.post(url, {}, format="json")
+    response = api_client.post(url, format="json")
 
-    expected_result = {"detail": "Authentication credentials were not provided."}
+    expected_result = {
+        "detail": "Authentication credentials were not provided.",
+    }
     response_json = response.json()
 
     assert response.status_code == 401
     assert response_json == expected_result
 
 
-def test_list_create_loan_success(api_client_logged):
+def test_create_loan_success(api_client_logged):
     url = "/v1/loans/"
     payload = {
         "amount": 5000.00,
@@ -126,3 +128,50 @@ def test_list_create_loan_success(api_client_logged):
 
     assert response.status_code == 201
     assert sorted(response_json) == expected_keys
+
+
+def test_list_all_loans_empty_success(api_client_logged):
+    url = "/v1/loans/"
+    response = api_client_logged.get(url, format="json")
+
+    expected_result = {"data": []}
+    response_json = response.json()
+
+    assert response.status_code == 200
+    assert response_json == expected_result
+
+
+def test_list_all_loans_with_database_success(api_client_logged, loan):
+    url = "/v1/loans/"
+    response = api_client_logged.get(url, format="json")
+
+    response_json = response.json()["data"][0]
+    expected_keys = [
+        "amount",
+        "bank",
+        "cet_amount",
+        "customer",
+        "date",
+        "id",
+        "installments",
+        "insurance",
+        "interest_rate",
+        "iof_interest_rate",
+        "ip_address",
+    ]
+
+    assert response.status_code == 200
+    assert sorted(response_json) == expected_keys
+
+
+def test_list_all_loans_not_authorized(api_client):
+    url = "/v1/loans/"
+    response = api_client.get(url, format="json")
+
+    expected_result = {
+        "detail": "Authentication credentials were not provided.",
+    }
+    response_json = response.json()
+
+    assert response.status_code == 401
+    assert response_json == expected_result

@@ -16,6 +16,13 @@ class PaymentBaseRepository:
 class ListAllPaymentsRepository(PaymentBaseRepository):
     def handle(self, loan_uuid):
         payments = self.model.objects.filter(loan=loan_uuid)
+
+        if payments.count() == 0:
+            raise ValidationError(
+                detail={"error": "Payments not found"},
+                code=HTTP_404_NOT_FOUND,
+            )
+
         return payments
 
 

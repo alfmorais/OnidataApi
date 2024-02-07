@@ -59,3 +59,25 @@ class LoansFactory(factory.django.DjangoModelFactory):
         left_digits=7,
         right_digits=2,
     )
+
+
+class PaymentFactory(factory.django.DjangoModelFactory):
+    class Meta:
+        model = "payments.Payment"
+
+    id = factory.Sequence(lambda n: n)
+    loan = factory.SubFactory(LoansFactory)
+    installment_amount = factory.Faker(
+        "pydecimal",
+        positive=True,
+        left_digits=7,
+        right_digits=2,
+    )
+    installment_number = factory.Faker(
+        "pyint",
+        min_value=1,
+        max_value=5,
+        step=1,
+    )
+    date = FuzzyDateTime(datetime(2024, 2, 5, 0, 0, 0, tzinfo=pytz.UTC))
+    is_paid = factory.Faker("pybool")

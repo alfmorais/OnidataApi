@@ -2,8 +2,10 @@ FROM python:3.11.7-bookworm
 
 LABEL maintainer="alfredomorais"
 
-WORKDIR /src
-COPY . /src
+WORKDIR /code/
+COPY pyproject.toml ./
+COPY tests/ ./
+COPY . ./
 
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1

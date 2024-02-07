@@ -1,5 +1,5 @@
-from apps.loans.api.v1.views import LoansListAndCreateView
-from apps.payments.api.v1.views import (
+from apps.loans.api.v1 import LoansListAndCreateView
+from apps.payments.api.v1 import (
     BalanceListView,
     PaymentListView,
     PaymentUpdateView,
