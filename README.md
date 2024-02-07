@@ -81,6 +81,16 @@ OBS:
 - API `api-token-auth/` não possui autenticação
 - Todas as outras APIs são necessários receber o parâmetro `Authorization` no headers da requisição HTTP.
 
+
+## Melhorias Implementas:
+
+- Declarar a quantidades de parcelas que o cliente pode solicitar.
+- Criação automática dos pagamentos, ficando apenas o critério de atualizar quando de fato efetuar o pagamento.
+- Calculo de Juros Compostos na hora de efetuar a contratação do empréstimo.
+- Calculo do Custo Efetivo Total.
+- Calculo do Imposto Sobre Operações Financeiras seguindo regulamentações vigentes.
+- Lógica de negócio desacoplado do Framework Django.
+
 ## Melhorias Previstas:
 
 - Rodar os testes com docker-compose.
