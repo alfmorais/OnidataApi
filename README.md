@@ -54,6 +54,9 @@ Para rodar os testes unitários e de integração no projeto basta rodar o coman
 make test
 ```
 
+OBS:
+- Como os testes estão rodando fora do container docker, verifique se o seu ambiente virtual está ativado para rodar os testes.
+
 ## Testando o sistema:
 
 Na pasta `docs` possui dois arquivos:
