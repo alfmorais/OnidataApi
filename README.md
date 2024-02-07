@@ -97,7 +97,7 @@ OBS:
 - Implementar a funcionalidade de cálculo de juros compostos `pro-rata dia`.
 - Implementar a funcionalidade de quitação antecipada do empréstimo.
 - Documentação em Swagger.
-- Alterar as variaveis de ambiente para um arquivo `.env`
+- Alterar as variaveis de ambiente para um arquivo `.env` e fazer a configuração no `settings.py`.
 - Planejar uma esteira de CI/CD no gitbuckets.
 
 ## Considerações Finais:
