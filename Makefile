@@ -11,7 +11,6 @@ build-run-project:
 test:
 	@echo "Running tests with pytest."
 	pytest -vvv --disable-warnings
-	# docker-compose run onidata pytest -vvv --ds=tests.settings $(PYTHONPATH)
 
 makemigrations:
 	@echo "Running makemigrations with docker."

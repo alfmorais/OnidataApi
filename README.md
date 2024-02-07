@@ -37,13 +37,16 @@ make build-run-project
 - Rodando o sistema com virtualenv:
 
 ```bash
-pip install -r requirements.txt && python3 src/manage.py runserver
+pip install -r requirements.txt
+python3 src/manage.py runserver
 ```
 
 - Rodando o sistema com Poetry:
 
 ```bash
-poetry install && poetry shell && python3 src/manage.py runserver
+poetry install
+poetry shell
+python3 src/manage.py runserver
 ```
 
 ## Rodando os testes do projeto:
