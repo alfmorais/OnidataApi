@@ -1,34 +1,31 @@
 # API Onidata
 
-- [Descrição detalhada do problema](INTRUÇÕES.md).
+- [Descrição detalhada do problema](INSTRUÇÕES.md).
 
-Esse projeto foi inspirado fortemente no guia de estilos de desenvolvimento de aplicações em Django - [HackSoftware](https://github.com/HackSoftware/Django-Styleguide).
-Onde foi tentado ao máximo aproveitar as facilidades que o Framework Django/DRF provém. Porém pensando em uma camada de separação de responsabilidades, foi criado duas camadas:
+Este projeto foi fortemente inspirado no guia de estilos de desenvolvimento de aplicações em Django do [HackSoftware](https://github.com/HackSoftware/Django-Styleguide), buscando aproveitar ao máximo as facilidades proporcionadas pelo Framework Django/DRF. No entanto, pensando em uma separação clara de responsabilidades, foram criadas duas camadas:
 
-- Serviços: Onde toda a manipulação de informações dados, cálculos de impostos, cálculos em gerais da aplicações estão nos arquivos `services.py`
-- Repositórios: A camada que representa a comunicação com o banco de dados estão no arquivos `repositories.py`. Nessa camada todos os dados foram pré-tradados pelo serializer/service e estão pronto para criar ou buscar recursos no Banco de Dados.
+- Serviços: onde ocorre toda a manipulação de informações, cálculos de impostos e demais operações relacionadas à lógica de negócios da aplicação, contidas nos arquivos `services.py`.
+- Repositórios: esta camada representa a comunicação com o banco de dados e está contida nos arquivos `repositories.py`. Aqui, todos os dados foram pré-processados pelo serializer/service e estão prontos para criar ou buscar recursos no banco de dados.
 
-Outras camadas seguiu padrão que está descrito no Django.
+As demais camadas seguiram o padrão descrito no Django.
 
-## Projeto:
+## Descrição do Projeto:
 
-Esse projeto tem como objetivo simular um solicitação de empréstimo. Onde o usuário solicita um empréstimo através da API informando valor, juros, parcelas, seguro, entre outros dados.
-Após criar um empréstimo, o próprio sistema cria as transações de pagamento do empréstimo conforme o número de parcelas. Todas são criadas com um campo que representa o status do pagamento. Por padrão o campo está como Falso. Quando for atualizado pela API esse campo passa a ser Verdadeiro e inclui o registro da data de pagamento.
+O objetivo deste projeto é simular uma solicitação de empréstimo, onde o usuário pode solicitar um empréstimo através da API, fornecendo informações como valor, juros, número de parcelas, seguro, entre outros dados. Após a criação do empréstimo, o sistema gera automaticamente as transações de pagamento do empréstimo com base no número de parcelas. Todas as transações são criadas com um campo que representa o status do pagamento, inicialmente definido como falso. Esse campo é atualizado para verdadeiro pela API quando o pagamento é efetuado, incluindo o registro da data de pagamento.
 
-Outras API tem como objetivo mostrar os empréstimos por usuário, listar pagamentos de empréstimos e extrato detalhado do empréstimo.
-
+Outras APIs têm como objetivo listar empréstimos por usuário, listar pagamentos de empréstimos e fornecer um extrato detalhado do empréstimo.
 
 ## Requisitos do Sistema:
 
-- Poetry (version 1.7.1)
-- Docker version 25.0.2, build 29cf629
-- Docker Compose version v2.24.3-desktop.1
+- Poetry (versão 1.7.1)
+- Docker (versão 25.0.2, build 29cf629)
+- Docker Compose (versão v2.24.3-desktop.1)
 
-## Instalando as depedências do Sistema:
+## Instalando as dependências do Sistema:
 
-Você pode usar rodar o sistema de 3 maneiras possiveis:
+Você pode executar o sistema de três maneiras possíveis:
 
-- Rodando o sistema com o docker-compose:
+- Rodando o sistema com Docker Compose:
 
 ```bash
 make build-run-project
@@ -37,6 +34,8 @@ make build-run-project
 - Rodando o sistema com virtualenv:
 
 ```bash
+virtualenv venv
+source venv/bin/activate
 pip install -r requirements.txt
 python3 src/manage.py runserver
 ```
@@ -49,28 +48,27 @@ poetry shell
 python3 src/manage.py runserver
 ```
 
-## Rodando os testes do projeto:
+## Executando os testes do projeto:
 
-Para rodar os testes unitários e de integração no projeto basta rodar o comando:
+Para executar os testes unitários e de integração do projeto, basta utilizar o seguinte comando:
 
 ```bash
 make test
 ```
 
-OBS:
-- Como os testes estão rodando fora do container docker, verifique se o seu ambiente virtual está ativado para rodar os testes.
+OBS: Certifique-se de que os testes estão sendo executados fora do container Docker e que o seu ambiente virtual está ativado.
 
 ## Testando o sistema:
 
-Na pasta `docs` possui dois arquivos:
+Na pasta `docs`, você encontrará dois arquivos:
 
 1. [Instruções Detalhadas das Requisições HTTP na API](docs/Endpoints.md)
 1. [Coleção em JSON do Postman, considerando todos os endpoints](docs/OnidataApi.postman_collection.json)
 
 
-## Criando um SUPER USÚARIO:
+## Criando um Super Usuário:
 
-Para criar um super usúario do Django basta rodar o comando e seguir os passos do terminal:
+Para criar um super usuário no Django, execute o seguinte comando e siga as instruções no terminal:
 
 ```bash
 make create-super-user
@@ -78,36 +76,33 @@ make create-super-user
 
 ## Criando um Token de Autenticação:
 
-Para criar um token de autenticação basta fazer uma chamada HTTP para a API `api-token-auth/` com seus dados de usúarios criado no passo anterior.
+Para criar um token de autenticação, faça uma chamada HTTP para a API api-token-auth/ com as credenciais de usuário criadas no passo anterior.
 
-OBS:
-- API `api-token-auth/` não possui autenticação
-- Todas as outras APIs são necessários receber o parâmetro `Authorization` no headers da requisição HTTP.
-
+OBS: A API api-token-auth/ não requer autenticação. No entanto, todas as outras APIs requerem o parâmetro Authorization no cabeçalho da requisição HTTP.
 
 ## Melhorias Implementas:
 
-- Declarar a quantidades de parcelas que o cliente pode solicitar.
-- Criação automática dos pagamentos, ficando apenas o critério de atualizar quando de fato efetuar o pagamento.
-- Calculo de Juros Compostos na hora de efetuar a contratação do empréstimo.
-- Calculo do Custo Efetivo Total.
-- Calculo do Imposto Sobre Operações Financeiras seguindo regulamentações vigentes.
-- Lógica de negócio desacoplado do Framework Django.
+- Declaração da quantidade de parcelas que o cliente pode solicitar.
+- Criação automática dos pagamentos, ficando apenas a critério da atualização quando o pagamento for efetuado.
+- Cálculo de Juros Compostos no momento da contratação do empréstimo.
+- Cálculo do Custo Efetivo Total.
+- Cálculo do Imposto Sobre Operações Financeiras seguindo as regulamentações vigentes.
+- Desacoplamento da lógica de negócio do Framework Django.
 
 ## Melhorias Previstas:
 
-- Rodar os testes com docker-compose.
-- Implementar a funcionalidade de cálculo de juros compostos `pro-rata dia`.
-- Implementar a funcionalidade de quitação antecipada do empréstimo.
-- Documentação em Swagger.
-- Alterar as variaveis de ambiente para um arquivo `.env` e fazer a configuração no `settings.py`.
-- Planejar uma esteira de CI/CD no gitbuckets.
+- Execução dos testes com Docker Compose.
+- Implementação da funcionalidade de cálculo de juros compostos pro-rata dia.
+- Implementação da funcionalidade de quitação antecipada do empréstimo.
+- Documentação no Swagger.
+- Alteração das variáveis de ambiente para um arquivo .env e configuração no settings.py.
+- Planejamento de uma esteira de CI/CD no Gitbuckets.
 
 ## Considerações Finais:
 
-Obrigado pela oportunidade de participar do processo de seleção da Matera/Onidata. Espero muito poder fazer parte dessa equipe.
+Agradeço pela oportunidade de participar do processo de seleção da Matera/Onidata. Espero sinceramente poder fazer parte desta equipe.
 
-Muito Obrigado
+Muito obrigado,
 
 Alfredo de Morais
 
