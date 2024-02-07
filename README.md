@@ -2,13 +2,21 @@
 
 - [Descrição detalhada do problema](INTRUÇÕES.md).
 
-Esse projeto foi inspirado fortemente na guida de estilos de desenvolvimento de aplicações em Django - [HackSoftware](https://github.com/HackSoftware/Django-Styleguide).
-Onde foi tentado ao máximo aproveitar as facilidades que o Framework Django / DRF provém. Porém pensando em uma camada de separação de responsabilidades, foi criado duas camadas:
+Esse projeto foi inspirado fortemente no guia de estilos de desenvolvimento de aplicações em Django - [HackSoftware](https://github.com/HackSoftware/Django-Styleguide).
+Onde foi tentado ao máximo aproveitar as facilidades que o Framework Django/DRF provém. Porém pensando em uma camada de separação de responsabilidades, foi criado duas camadas:
 
 - Serviços: Onde toda a manipulação de informações dados, cálculos de impostos, cálculos em gerais da aplicações estão nos arquivos `services.py`
-- Repositórios: A camada que representa a comunicação com o banco de dados estão no arquivos `repositories.py`. Nessa camada todos os dados foram pré-tradados pelo serializer / service e estão pronto para Criar, Atualizar, Solicitar informações do Banco de Dados.
+- Repositórios: A camada que representa a comunicação com o banco de dados estão no arquivos `repositories.py`. Nessa camada todos os dados foram pré-tradados pelo serializer/service e estão pronto para criar ou buscar recursos no Banco de Dados.
 
 Outras camadas seguiu padrão que está descrito no Django.
+
+## Projeto:
+
+Esse projeto tem como objetivo simular um solicitação de empréstimo. Onde o usuário solicita um empréstimo através da API informando valor, juros, parcelas, seguro, entre outros dados.
+Após criar um empréstimo, o próprio sistema cria as transações de pagamento do empréstimo conforme o número de parcelas. Todas são criadas com um campo que representa o status do pagamento. Por padrão o campo está como Falso. Quando for atualizado pela API esse campo passa a ser Verdadeiro e inclui o registro da data de pagamento.
+
+Outras API tem como objetivo mostrar os empréstimos por usuário, listar pagamentos de empréstimos e extrato detalhado do empréstimo.
+
 
 ## Requisitos do Sistema:
 
@@ -18,7 +26,7 @@ Outras camadas seguiu padrão que está descrito no Django.
 
 ## Instalando as depedências do Sistema:
 
-Você pode usar rodar o sistema de 3 maneiras possiveis: 
+Você pode usar rodar o sistema de 3 maneiras possiveis:
 
 - Rodando o sistema com o docker-compose:
 
@@ -81,9 +89,10 @@ OBS:
 
 ## Considerações Finais:
 
-Obrigado pela oportunidade de participar do processo de seleção da Matera / Onidata. Espero muito poder fazer parte dessa equipe.
+Obrigado pela oportunidade de participar do processo de seleção da Matera/Onidata. Espero muito poder fazer parte dessa equipe.
 
 Muito Obrigado
+
 Alfredo de Morais
 
 - [Github](https://github.com/alfmorais/)
