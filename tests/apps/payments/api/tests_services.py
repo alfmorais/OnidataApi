@@ -56,12 +56,13 @@ def test_balance_service_success(loan, payment_with_loan):
 
     assert sorted(response.keys()) == sorted(
         [
-            "loan_id",
-            "installments_paid",
-            "installments_missing_payment",
-            "total_installments",
-            "amount_paid",
             "amount_missing_payment",
+            "amount_paid",
+            "installments_missing_payment",
+            "installments_paid",
+            "interest_rate",
+            "loan_id",
+            "total_installments",
         ]
     )
     assert isinstance(response, dict)
