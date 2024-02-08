@@ -28,7 +28,7 @@ Você pode executar o sistema de três maneiras possíveis:
 - Rodando o sistema com Docker Compose:
 
 ```bash
-make build-run-project
+make build
 ```
 
 - Rodando o sistema com virtualenv:
@@ -37,7 +37,6 @@ make build-run-project
 virtualenv venv
 source venv/bin/activate
 pip install -r requirements.txt
-python3 src/manage.py runserver
 ```
 
 - Rodando o sistema com Poetry:
@@ -45,18 +44,19 @@ python3 src/manage.py runserver
 ```bash
 poetry install
 poetry shell
-python3 src/manage.py runserver
 ```
 
 ## Rodando as migrações do Banco de Dados:
 
 - Rodando pelo Docker Compose:
+
 ```bash
 make makemigrations
 make migrate
 ```
 
 - Rodando pelo Poetry e Virtualenv
+
 ```bash
 python3 src/manage.py makemigrations
 python3 src/manage.py migrate
@@ -72,14 +72,6 @@ make test
 
 OBS: Certifique-se de que os testes estão sendo executados fora do container Docker e que o seu ambiente virtual está ativado.
 
-## Testando o sistema:
-
-Na pasta `docs`, você encontrará dois arquivos:
-
-1. [Instruções Detalhadas das Requisições HTTP na API](docs/Endpoints.md)
-1. [Coleção em JSON do Postman, considerando todos os endpoints](docs/OnidataApi.postman_collection.json)
-
-
 ## Criando um Super Usuário / Admin:
 
 Para criar um super usuário no Django, execute o seguinte comando e siga as instruções no terminal:
@@ -93,15 +85,46 @@ make create-super-user
 OBS: Com esse usuário será possivel acessar o Painel Administrativo.
 
 - Rodando pelo Poetry e Virtualenv
+
 ```bash
 python3 src/manage.py createsuperuser
 ```
 
+## Rodando o sistema:
+
+Para rodar o sistema com o docker compose:
+
+```bash
+make run-with-logs
+```
+
+Para rodar o sistema com Poetry ou Virtualenv
+
+```bash
+python3 src/manage.py runserver 0.0.0.0:8000
+```
+
+## Testando o sistema:
+
+Endpoints:
+
+- **Auth**: POST `api-token-auth/` - Criar um token de autenticação
+- **Loans**: GET `v1/loans/` - Listar todos os Empréstimos
+- **Loans**: GET `v1/loans/` - Criar um Empréstimo
+- **Payments**: PUT `v1/payments/` - Atualizar uma cobrança de Pagamento
+- **Payments**: GET `v1/payments/:loan_uuid/` - Listar todos os Pagamentos por Empréstimo
+- **Payments**: GET `v1/payments/:loan_uuid/balance/` - Listar o saldo devedor por Empréstimo
+
+Na pasta `docs`, você encontrará dois arquivos:
+
+1. [Instruções Detalhadas das Requisições HTTP na API](docs/Endpoints.md)
+1. [Coleção em JSON do Postman, considerando todos os endpoints](docs/OnidataApi.postman_collection.json)
+
 ## Criando um Token de Autenticação:
 
-Para criar um token de autenticação, faça uma chamada HTTP para a API api-token-auth/ com as credenciais de usuário criadas no passo anterior.
+Para criar um token de autenticação, faça uma chamada HTTP para o endpoint POST `api-token-auth/` com as credenciais de usuário criadas no passo anterior.
 
-OBS: A API api-token-auth/ não requer autenticação. No entanto, todas as outras APIs requerem o parâmetro Authorization no cabeçalho da requisição HTTP.
+OBS: O Endpoint POST `api-token-auth/` não requer autenticação. No entanto, todas os outros endpoints requerem o parâmetro Authorization no cabeçalho da requisição HTTP.
 
 ## Melhorias Implementas:
 

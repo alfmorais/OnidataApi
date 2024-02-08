@@ -3,9 +3,22 @@ requirements-generate:
 	@echo "Generate requirements.txt file with hashes."
 	poetry export -f requirements.txt --with=test --output requirements.txt
 
-build-run-project:
+build:
+	@echo "Build project with docker."
+	docker-compose build
+
+run-with-logs:
 	@echo "Running project with docker."
-	docker-compose up --build
+	docker-compose up
+
+run-without-logs:
+	@echo "Running project with docker."
+	docker-compose up -d
+
+run-without-docker:
+	export DEBUG=1
+	export DJANGO_ALLOWED_HOSTS="*"
+	python3 src/manage.py runserver
 
 .PHONY: test
 test:
@@ -14,15 +27,15 @@ test:
 
 makemigrations:
 	@echo "Running makemigrations with docker."
-	docker-compose run onidata python3 src/manage.py makemigrations
+	docker-compose exec onidata python3 src/manage.py makemigrations
 
 migrate:
 	@echo "Running migrate with docker."
-	docker-compose run onidata python3 src/manage.py migrate
+	docker-compose exec onidata python3 src/manage.py migrate
 
 create-super-user:
 	@echo "Creating superuser."
-	docker-compose run onidata python3 src/manage.py createsuperuser
+	docker-compose exec onidata python3 src/manage.py createsuperuser
 
 itsmine:
 	@echo "Itsmine"
@@ -30,8 +43,12 @@ itsmine:
 
 shell:
 	@echo "Shell on docker-compose."
-	docker-compose run onidata python3 src/manage.py shell
+	docker-compose exec onidata python3 src/manage.py shell
 
 remove-pycaches:
 	@echo "Delete pycaches files."
 	find . | grep -E "(/__pycache__$|\.pyc$|\.pyo$)" | xargs rm -rf
+
+close:
+	@echo "Down docker-compose containers"
+	docker-compose down

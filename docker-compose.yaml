@@ -10,15 +10,16 @@ services:
       - "8000:8000"
     volumes:
       - ./src:/src
-      - dev-static-data:/vol/web
+    env_file:
+      - ./.env
     command: >
       sh -c "python3 src/manage.py runserver 0.0.0.0:8000"
     environment:
       - DJANGO_SETTINGS_MODULE=onidata.settings
-      - DB_HOST=db
-      - DB_NAME=devdb
-      - DB_USER=devuser
-      - DB_PASS=changeme
+      - SQL_HOST=db
+      - SQL_DATABASE=hello_django_dev
+      - POSTGRES_USER=hello_django
+      - POSTGRES_PASSWORD=hello_django
       - DEBUG=1
     depends_on:
       - db
@@ -26,12 +27,11 @@ services:
   db:
     image: postgres:13-alpine
     volumes:
-      - dev-db-data:/var/lib/postgresql/data
+      - postgres_data:/var/lib/postgresql/data
     environment:
-      - POSTGRES_DB=devdb
-      - POSTGRES_USER=devuser
-      - POSTGRES_PASSWORD=changeme
+      - POSTGRES_DB=hello_django_dev
+      - POSTGRES_USER=hello_django
+      - POSTGRES_PASSWORD=hello_django
 
 volumes:
-  dev-db-data:
-  dev-static-data:
+  postgres_data:
