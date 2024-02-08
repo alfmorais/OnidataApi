@@ -21,6 +21,8 @@ Outras APIs têm como objetivo listar empréstimos por usuário, listar pagament
 - Docker (versão 25.0.2, build 29cf629)
 - Docker Compose (versão v2.24.3-desktop.1)
 
+OBS: Caso os comandos com docker não funcionar, verifique a compatibilidade no arquivo Makefile. Ao invés de: docker-compose <comando> use docker compose.
+
 ## Instalando as dependências do Sistema:
 
 Você pode executar o sistema de três maneiras possíveis:
