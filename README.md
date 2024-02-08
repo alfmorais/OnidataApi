@@ -62,14 +62,6 @@ Você pode executar o sistema de três maneiras possíveis:
 make build
 ```
 
-- Rodando o sistema com virtualenv:
-
-```bash
-virtualenv venv
-source venv/bin/activate
-pip install -r requirements.txt
-```
-
 - Rodando o sistema com Poetry:
 
 ```bash
@@ -88,7 +80,7 @@ make makemigrations
 make migrate
 ```
 
-- Rodando pelo Poetry e Virtualenv
+- Rodando pelo Poetry:
 
 ```bash
 python3 src/manage.py makemigrations
@@ -105,7 +97,12 @@ Para executar os testes unitários e de integração do projeto, basta utilizar 
 make test
 ```
 
-OBS: Certifique-se de que os testes estão sendo executados fora do container Docker e que o seu ambiente virtual está ativado.
+OBS: Certifique-se de que os testes estão sendo executados fora do container Docker e que o seu ambiente virtual está ativado. Caso ao contrário:
+
+```bash
+poetry shell
+make test
+```
 
 <div id='7'/>
 
@@ -121,7 +118,7 @@ make create-super-user
 
 OBS: Com esse usuário será possivel acessar o Painel Administrativo.
 
-- Rodando pelo Poetry e Virtualenv
+- Rodando pelo Poetry:
 
 ```bash
 python3 src/manage.py createsuperuser
@@ -137,7 +134,7 @@ Para rodar o sistema com o docker compose:
 make run-with-logs
 ```
 
-Para rodar o sistema com Poetry ou Virtualenv
+Para rodar o sistema com Poetry:
 
 ```bash
 python3 src/manage.py runserver 0.0.0.0:8000
