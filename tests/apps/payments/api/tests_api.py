@@ -160,14 +160,17 @@ def test_list_balance_by_loan_success(
     url = f"/v1/payments/{loan.id}/balance/"
     response = api_client_logged.get(url, format="json")
 
-    expected_result = [
-        "amount_missing_payment",
-        "amount_paid",
-        "installments_missing_payment",
-        "installments_paid",
-        "loan_id",
-        "total_installments",
-    ]
+    expected_result = sorted(
+        [
+            "amount_missing_payment",
+            "amount_paid",
+            "installments_missing_payment",
+            "installments_paid",
+            "interest_rate",
+            "loan_id",
+            "total_installments",
+        ]
+    )
     response_json = response.json()["data"]
 
     assert response.status_code == 200

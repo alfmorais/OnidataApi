@@ -22,6 +22,7 @@ class PaymentUpdateSerializer(serializers.Serializer):
 
 class BalanceSerializer(serializers.Serializer):
     loan_id = serializers.UUIDField()
+    interest_rate = serializers.CharField()
     installments_paid = serializers.IntegerField()
     installments_missing_payment = serializers.IntegerField()
     total_installments = serializers.IntegerField()

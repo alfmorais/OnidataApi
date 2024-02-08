@@ -32,13 +32,12 @@ class BalanceService:
 
     def handle(self, loan_uuid):
         queryset = self.repository.handle(loan_uuid)
+
         installments_paid = []
         installments_missing_payment = []
-        interest_rate = 0
+        interest_rate = queryset[0].loan.interest_rate
 
         for payment in queryset:
-            interest_rate = payment.loan.interest_rate
-
             if payment.is_paid:
                 installments_paid.append(payment)
             else:
