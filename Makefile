@@ -27,15 +27,15 @@ test:
 
 makemigrations:
 	@echo "Running makemigrations with docker."
-	docker-compose exec onidata python3 src/manage.py makemigrations
+	docker-compose run onidata python3 src/manage.py makemigrations
 
 migrate:
 	@echo "Running migrate with docker."
-	docker-compose exec onidata python3 src/manage.py migrate
+	docker-compose run onidata python3 src/manage.py migrate
 
 create-super-user:
 	@echo "Creating superuser."
-	docker-compose exec onidata python3 src/manage.py createsuperuser
+	docker-compose run onidata python3 src/manage.py createsuperuser
 
 itsmine:
 	@echo "Itsmine"
@@ -43,7 +43,7 @@ itsmine:
 
 shell:
 	@echo "Shell on docker-compose."
-	docker-compose exec onidata python3 src/manage.py shell
+	docker-compose run onidata python3 src/manage.py shell
 
 remove-pycaches:
 	@echo "Delete pycaches files."
