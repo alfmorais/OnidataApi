@@ -124,7 +124,7 @@ Na pasta `docs`, você encontrará dois arquivos:
 
 ## Criando um Token de Autenticação:
 
-Para criar um token de autenticação, faça uma chamada HTTP para o endpoint POST `api-token-auth/` com as credenciais de usuário criadas no passo anterior.
+Para criar um token de autenticação, faça uma chamada HTTP para o endpoint POST `api-token-auth/` com as credenciais de usuário (body json com as chaves `username`, `password` e seus respectivos valores. Para exemplo completo veja a [documentação das chamadas dos Endpoints](docs/Endpoints.md)) criadas no passo anterior.
 
 OBS: O Endpoint POST `api-token-auth/` não requer autenticação. No entanto, todas os outros endpoints requerem o parâmetro Authorization no cabeçalho da requisição HTTP.
 
