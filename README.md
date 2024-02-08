@@ -160,6 +160,7 @@ Na pasta `docs`, você encontrará dois arquivos:
 
 1. [Instruções Detalhadas das Requisições HTTP na API](docs/Endpoints.md)
 1. [Coleção em JSON do Postman, considerando todos os endpoints](docs/OnidataApi.postman_collection.json)
+3. [Arquivo com descrição detalhada de todos os comandos referenciados no Makefile](docs/MakefileDocs.md)
 
 <div id='10'/>
 
