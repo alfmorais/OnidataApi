@@ -187,6 +187,7 @@ OBS: O Endpoint POST `api-token-auth/` não requer autenticação. No entanto, t
 - Execução dos testes com Docker Compose.
 - Implementação da funcionalidade de cálculo de juros compostos pro-rata dia.
 - Implementação da funcionalidade de quitação antecipada do empréstimo.
+- Implementação da conclusão de pagamento do empréstimo.
 - Documentação no Swagger.
 - Alteração das variáveis de ambiente para um arquivo .env e configuração no settings.py.
 - Planejamento de uma esteira de CI/CD no Gitbuckets.
