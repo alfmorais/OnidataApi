@@ -23,6 +23,10 @@ Outras APIs têm como objetivo listar empréstimos por usuário, listar pagament
 
 OBS: Caso os comandos com docker não funcionar, verifique a compatibilidade no arquivo Makefile. Ao invés de: docker-compose <comando> use docker compose.
 
+## Alteração do arquivo .env
+
+Altera o nome do arquivo `.env.example` para `.env`
+
 ## Instalando as dependências do Sistema:
 
 Você pode executar o sistema de três maneiras possíveis:
