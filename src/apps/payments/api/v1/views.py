@@ -1,3 +1,8 @@
+"""
+TODO: Views não ficaram enxutas, métodos post e get foram sobrescritos
+desnecessariamente mesmo sem o cénario de obtenção do IP.
+"""
+
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response

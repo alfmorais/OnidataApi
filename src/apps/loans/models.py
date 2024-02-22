@@ -76,5 +76,8 @@ class Loans(models.Model):
         verbose_name = "Empréstimo"
         verbose_name_plural = "Empréstimos"
 
+    """
+    TODO: Nenhum método de modelo (o próprio saldo devedor poderia ser um)
+    """
     def __str__(self) -> str:
         return f"ID: {self.id} - Amount: {self.amount}"

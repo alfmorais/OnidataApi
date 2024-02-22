@@ -1,3 +1,9 @@
+"""
+TODO: A estrutura inteira de repositórios é desnecessária e os recursos do próprio REST
+framework não foram aproveitados (ListCreateView, ModelSerializers, etc)
+"""
+
+
 from django.contrib.auth.models import User
 from django.db.utils import IntegrityError, OperationalError
 from loans.models import Loans

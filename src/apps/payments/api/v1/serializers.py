@@ -1,6 +1,11 @@
 from payments.models import Payment
 from rest_framework import serializers
 
+"""
+TODO: Duplicidade de serializers (um único model serializer
+resolveria a necessidade de todos os endpoints no problema)
+"""
+
 
 class PaymentSerializer(serializers.ModelSerializer):
     class Meta:
