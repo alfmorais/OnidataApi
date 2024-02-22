@@ -1,3 +1,8 @@
+"""
+TODO: Views não ficaram enxutas, métodos post e get foram sobrescritos
+desnecessariamente mesmo sem o cénario de obtenção do IP.
+"""
+
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
@@ -6,6 +11,12 @@ from rest_framework.views import APIView
 
 from .serializers import LoanCreateSerializer, LoansSerializer
 from .services import CreateLoanService, ListAllLoansService
+
+"""
+TODO: Endereço de IP  sendo passado como field no corpo da requisição
+ao invés da utilização de um método ou recurso para obtenção pelo cabeçalho
+no objeto request.
+"""
 
 
 class LoansListAndCreateView(APIView):
